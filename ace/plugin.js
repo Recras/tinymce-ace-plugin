@@ -1,4 +1,4 @@
-/* 
+/*
  * Ace Editor Plugin for TinyMCE 4.0
  * By Daniel Jones - info@d-k-j.com
  * https://github.com/tradesman/tinymce-ace-plugin
@@ -6,26 +6,26 @@
  * Minor edits by Recras - devs@recras.nl
  */
 
-tinymce.PluginManager.add("ace", function(a) {
-	function t() {
-		var t = $(window).innerWidth() - 30,
-			i = $(window).innerHeight() - 120;
-		t > 1800 && (t = 1800), i > 1200 && (i = 1200);
+tinymce.PluginManager.add("ace", function(editor) {
+	function aceEditor() {
+		var innerWidth = $(window).innerWidth() - 30,
+			innerHeight = $(window).innerHeight() - 120;
+		innerWidth > 1800 && (innerWidth = 1800), innerHeight > 1200 && (innerHeight = 1200);
 
-		var x = (t - 20) % 138;
+		var x = (innerWidth - 20) % 138;
 
-		if (t = t - x + 10, t > 600) {
-			var x = (t - 20) % 138;
-			t = t - x + 10
+		if (innerWidth = innerWidth - x + 10, innerWidth > 600) {
+			var x = (innerWidth - 20) % 138;
+			innerWidth = innerWidth - x + 10
 		}
 
-		a.windowManager.open({
+		editor.windowManager.open({
 			title: "Source code",
 			type: "container",
 			id: "mce-ace-editor",
 			name: "ace",
-			width: t,
-			height: i,
+			width: innerWidth,
+			height: innerHeight,
 			inline: 1,
 			buttons:[
 				{
@@ -35,11 +35,11 @@ tinymce.PluginManager.add("ace", function(a) {
 						if(typeof mce_editor !== "undefined") {
 							var html = mce_editor.getValue();
 
-							a.focus(), a.undoManager.transact(function() {
-								a.setContent(html)
-							}), a.selection.setCursorLocation(), a.nodeChanged();
+							editor.focus(), editor.undoManager.transact(function() {
+								editor.setContent(html)
+							}), editor.selection.setCursorLocation(), editor.nodeChanged();
 
-							a.windowManager.close();
+							editor.windowManager.close();
 						}
 					}
 				},
@@ -64,7 +64,7 @@ tinymce.PluginManager.add("ace", function(a) {
 			mce_editor.getSession().setUseWrapMode(true);
 
 			// Set editor contents
-			mce_editor.getSession().setValue(a.getContent({
+			mce_editor.getSession().setValue(editor.getContent({
 				source_view: !0
 			}));
 		}
@@ -90,14 +90,14 @@ tinymce.PluginManager.add("ace", function(a) {
 		soddoffmce();
 	}
 
-	a.addCommand("mceace_codeEditor", t), a.addButton("ace", {
+	editor.addCommand("mceace_codeEditor", aceEditor), editor.addButton("ace", {
 		icon: "code",
 		tooltip: "Source code",
-		onclick: t
-	}), a.addMenuItem("ace", {
+		onclick: aceEditor
+	}), editor.addMenuItem("ace", {
 		icon: "code",
 		text: "Source code",
 		context: "tools",
-		onclick: t
+		onclick: aceEditor
 	})
 });
