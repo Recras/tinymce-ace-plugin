@@ -4,6 +4,7 @@ Ace Editor plugin for TinyMCE 4.0
 How to use:
 
 * Install and load [Ace Editor](https://github.com/ajaxorg/ace-builds/)
+* Minify `ace/plugin.js` to `ace/plugin.min.js`
 * Copy ace (or ace_beautify) folder to TinyMCE plugins
 * Add to list of plugins where tinymce is called
 
@@ -20,7 +21,3 @@ tinymce.init({
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ace"
 });
 ```
-
-Non-minified version included with some comments. Edit this to alter the Ace Editor options and save to plugin.min.js.
-
-I have included a version that works with the fantastic [JS Beautifier](https://github.com/beautify-web/js-beautify), just use ace_beautify instead.
